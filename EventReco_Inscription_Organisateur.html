@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription Organisateur — Event Reco Africa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #D4A827;
+    --gold-light: #F0C040;
+    --gold-pale: #fffde7;
+    --dark: #0C0E18;
+    --dark2: #1a1d2e;
+    --text: #202124;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --white: #ffffff;
+    --bg: #f5f3ef;
+    --radius: 12px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0 0 80px;
+  }
+
+  /* ── HERO HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark2) 60%, #2a1f00 100%);
+    padding: 48px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(212,168,39,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(212,168,39,0.1) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .logo-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(212,168,39,0.15);
+    border: 1px solid rgba(212,168,39,0.3);
+    border-radius: 50px;
+    padding: 8px 20px;
+    margin-bottom: 24px;
+  }
+  .logo-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+  .logo-text { color: var(--gold); font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 42px);
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .hero-badges {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 50px;
+  }
+
+  /* ── PROGRESS ── */
+  .progress-wrap {
+    background: var(--white);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .progress-bar {
+    height: 5px;
+    background: var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+    border-radius: 10px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── LAYOUT ── */
+  .wrap { max-width: 660px; margin: 0 auto; padding: 32px 16px; }
+
+  /* ── SECTION BANNER ── */
+  .section-banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 16px;
+  }
+  .section-num {
+    width: 36px; height: 36px;
+    background: var(--dark);
+    color: var(--gold);
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .section-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--dark);
+    font-weight: 600;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+
+  /* ── QUESTION CARD ── */
+  .qcard {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow);
+    border: 1.5px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .qcard:focus-within {
+    border-color: var(--gold);
+    box-shadow: 0 4px 20px rgba(212,168,39,0.15);
+  }
+  .qlabel {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 14px;
+    line-height: 1.5;
+  }
+  .qlabel .req { color: #e53e3e; }
+  .qhint {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: -8px;
+    margin-bottom: 14px;
+  }
+
+  /* ── INPUTS ── */
+  .q-input, .q-textarea, .q-select {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    padding: 10px 0 8px;
+    font-size: 14px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    background: transparent;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .q-input:focus, .q-textarea:focus, .q-select:focus {
+    border-bottom-color: var(--gold);
+  }
+  .q-input::placeholder, .q-textarea::placeholder { color: #bbb; }
+  .q-textarea { resize: none; min-height: 70px; }
+  .select-wrap { position: relative; }
+  .select-wrap::after {
+    content: '▾';
+    position: absolute;
+    right: 2px; top: 10px;
+    color: var(--muted);
+    pointer-events: none;
+    font-size: 13px;
+  }
+  .q-select { appearance: none; cursor: pointer; }
+
+  /* ── CHOICES ── */
+  .choices { display: flex; flex-direction: column; gap: 8px; }
+  .choices.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  .choice-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .choice-item:hover { border-color: var(--gold); background: var(--gold-pale); }
+  .choice-item input[type=radio],
+  .choice-item input[type=checkbox] {
+    accent-color: var(--gold);
+    width: 17px; height: 17px;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .choice-item span { font-size: 14px; color: var(--text); cursor: pointer; }
+
+  /* ── PLAN CARDS ── */
+  .plan-cards { display: flex; flex-direction: column; gap: 12px; }
+  .plan-card {
+    border: 2px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .plan-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--border);
+    transition: background 0.2s;
+  }
+  .plan-card:hover { border-color: var(--gold); background: var(--gold-pale); }
+  .plan-card:hover::before, .plan-card.selected::before { background: var(--gold); }
+  .plan-card.selected { border-color: var(--gold); background: var(--gold-pale); box-shadow: 0 4px 16px rgba(212,168,39,0.2); }
+  .plan-card input { accent-color: var(--gold); width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; }
+  .plan-tag {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--gold);
+    color: var(--dark);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .plan-title { font-size: 16px; font-weight: 600; color: var(--text); }
+  .plan-price { font-size: 22px; font-weight: 700; color: var(--gold); margin: 4px 0; }
+  .plan-desc { font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .plan-desc li { list-style: none; padding: 2px 0; }
+  .plan-desc li::before { content: '✓ '; color: var(--gold); }
+
+  /* ── SUBMIT ── */
+  .submit-section {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    margin-top: 8px;
+  }
+  .submit-btn {
+    background: var(--dark);
+    color: var(--gold);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 15px 40px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+    width: 100%;
+    max-width: 320px;
+  }
+  .submit-btn:hover { background: var(--gold); color: var(--dark); }
+  .submit-note { font-size: 12px; color: var(--muted); margin-top: 12px; }
+
+  /* ── SUCCESS ── */
+  .success-screen {
+    display: none;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 60px 32px;
+    text-align: center;
+    box-shadow: var(--shadow);
+  }
+  .success-icon { font-size: 60px; margin-bottom: 20px; }
+  .success-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: var(--dark);
+    margin-bottom: 12px;
+  }
+  .success-text { font-size: 15px; color: var(--muted); line-height: 1.8; max-width: 400px; margin: 0 auto 28px; }
+  .success-contact {
+    background: var(--gold-pale);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 2;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  /* ── FOOTER ── */
+  .form-footer {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 32px;
+    line-height: 2;
+    padding: 0 16px;
+  }
+  .form-footer strong { color: var(--gold); }
+
+  /* ── HIDDEN PAIEMENT BLOCK ── */
+  #paiement-block { display: none; }
+
+  /* ── REQUIRED NOTE ── */
+  .required-note {
+    font-size: 12px;
+    color: #e53e3e;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  @media(max-width: 500px) {
+    .choices.grid { grid-template-columns: 1fr; }
+    .hero { padding: 36px 20px 44px; }
+    .plan-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="logo-badge">
+    <div class="logo-dot"></div>
+    <span class="logo-text">Event Reco Africa</span>
+    <div class="logo-dot"></div>
+  </div>
+  <h1 class="hero-title">Inscription <span>Organisateur</span><br>& Visiteur</h1>
+  <p class="hero-subtitle">La première plateforme digitale de services événementiels de Côte d'Ivoire. Accédez à des prestataires vérifiés, envoyez des devis express et organisez en toute sérénité.</p>
+  <div class="hero-badges">
+    <span class="badge">📍 Côte d'Ivoire</span>
+    <span class="badge">⚡ Devis en 48-72H</span>
+    <span class="badge">✅ Prestataires vérifiés</span>
+    <span class="badge">🔒 Données sécurisées</span>
+  </div>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-info">
+    <span id="progress-label">Début du formulaire</span>
+    <span id="progress-pct">0%</span>
+  </div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+</div>
+
+<div class="wrap" id="main-form">
+
+  <div class="required-note">* Champs obligatoires</div>
+
+  <!-- ════════════ ÉTAPE 1 ════════════ -->
+  <div class="section-banner">
+    <div class="section-num">1</div>
+    <div class="section-label">Informations personnelles</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Prénom <span class="req">*</span></div>
+    <input class="q-input" id="prenom" type="text" placeholder="Votre prénom" oninput="updateProgress()">
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Nom de famille <span class="req">*</span></div>
+    <input class="q-input" id="nom" type="text" placeholder="Votre nom" oninput="updateProgress()">
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Adresse email <span class="req">*</span></div>
+    <input class="q-input" id="email" type="email" placeholder="exemple@email.com" oninput="updateProgress()">
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Numéro WhatsApp <span class="req">*</span></div>
+    <div class="qhint">Nous vous contacterons via WhatsApp pour confirmer votre inscription</div>
+    <input class="q-input" id="whatsapp" type="tel" placeholder="+225 07 XX XX XX XX" oninput="updateProgress()">
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Ville / Commune <span class="req">*</span></div>
+    <div class="select-wrap">
+      <select class="q-select" id="ville" onchange="updateProgress()">
+        <option value="" disabled selected>Sélectionnez votre ville</option>
+        <optgroup label="Abidjan">
+          <option>Cocody</option><option>Plateau</option><option>Marcory</option>
+          <option>Yopougon</option><option>Treichville</option><option>Adjamé</option>
+          <option>Abobo</option><option>Koumassi</option><option>Port-Bouët</option>
+          <option>Bingerville</option><option>Anyama</option>
+        </optgroup>
+        <optgroup label="Autres villes CI">
+          <option>Bouaké</option><option>San Pedro</option><option>Daloa</option>
+          <option>Yamoussoukro</option><option>Korhogo</option><option>Autre</option>
+        </optgroup>
+      </select>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Profil <span class="req">*</span></div>
+    <div class="choices">
+      <label class="choice-item"><input type="radio" name="profil" onchange="updateProgress()"><span>Particulier</span></label>
+      <label class="choice-item"><input type="radio" name="profil" onchange="updateProgress()"><span>PME / Start-up</span></label>
+      <label class="choice-item"><input type="radio" name="profil" onchange="updateProgress()"><span>Grande entreprise / Multinationale</span></label>
+      <label class="choice-item"><input type="radio" name="profil" onchange="updateProgress()"><span>ONG / Association</span></label>
+      <label class="choice-item"><input type="radio" name="profil" onchange="updateProgress()"><span>Agence événementielle</span></label>
+      <label class="choice-item"><input type="radio" name="profil" onchange="updateProgress()"><span>Institution publique / Gouvernement</span></label>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Nom de l'entreprise <span style="font-weight:300;font-size:13px;color:#999">(si applicable)</span></div>
+    <input class="q-input" type="text" placeholder="Raison sociale ou nom de l'organisation">
+  </div>
+
+  <!-- ════════════ ÉTAPE 2 ════════════ -->
+  <div class="section-banner">
+    <div class="section-num">2</div>
+    <div class="section-label">Vos besoins événementiels</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Types d'événements que vous organisez <span class="req">*</span></div>
+    <div class="qhint">Plusieurs réponses possibles</div>
+    <div class="choices grid">
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>💍 Mariage</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎂 Anniversaire</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🏢 Séminaire / Formation</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎵 Concert / Spectacle</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🌟 Soirée Gala / Awards</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>👶 Baptême / Communion</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎤 Conférence / Forum</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🏗️ Inauguration</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎪 Foire / Exposition</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>Autre</span></label>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Fréquence d'organisation par an <span class="req">*</span></div>
+    <div class="choices">
+      <label class="choice-item"><input type="radio" name="freq" onchange="updateProgress()"><span>1 fois par an</span></label>
+      <label class="choice-item"><input type="radio" name="freq" onchange="updateProgress()"><span>2 à 3 fois par an</span></label>
+      <label class="choice-item"><input type="radio" name="freq" onchange="updateProgress()"><span>4 à 6 fois par an</span></label>
+      <label class="choice-item"><input type="radio" name="freq" onchange="updateProgress()"><span>Plus de 6 fois par an</span></label>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Nombre moyen d'invités par événement <span class="req">*</span></div>
+    <div class="choices">
+      <label class="choice-item"><input type="radio" name="invites" onchange="updateProgress()"><span>Moins de 50 personnes</span></label>
+      <label class="choice-item"><input type="radio" name="invites" onchange="updateProgress()"><span>50 à 150 personnes</span></label>
+      <label class="choice-item"><input type="radio" name="invites" onchange="updateProgress()"><span>150 à 300 personnes</span></label>
+      <label class="choice-item"><input type="radio" name="invites" onchange="updateProgress()"><span>Plus de 300 personnes</span></label>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Services que vous recherchez le plus souvent <span class="req">*</span></div>
+    <div class="qhint">Plusieurs réponses possibles</div>
+    <div class="choices grid">
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎧 DJ & Sonorisation</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🍽️ Traiteur / Restauration</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🌸 Décoration / Scénographie</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>📸 Photo & Vidéo</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🚚 Logistique / Transport</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎤 MC & Animation</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🏨 Espaces & Salles</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>👔 Hôtesses & Protocole</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🎠 Animations enfants</span></label>
+      <label class="choice-item"><input type="checkbox" onchange="updateProgress()"><span>🖨️ Impression / Signalétique</span></label>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Budget moyen pour vos événements (FCFA)</div>
+    <div class="choices">
+      <label class="choice-item"><input type="radio" name="budget"><span>Moins de 500 000 F</span></label>
+      <label class="choice-item"><input type="radio" name="budget"><span>500 000 à 2 000 000 F</span></label>
+      <label class="choice-item"><input type="radio" name="budget"><span>2 000 000 à 5 000 000 F</span></label>
+      <label class="choice-item"><input type="radio" name="budget"><span>Plus de 5 000 000 F</span></label>
+    </div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Comment avez-vous connu Event Reco Africa ?</div>
+    <div class="choices">
+      <label class="choice-item"><input type="radio" name="source"><span>Bouche à oreille / Ami</span></label>
+      <label class="choice-item"><input type="radio" name="source"><span>Facebook / Instagram</span></label>
+      <label class="choice-item"><input type="radio" name="source"><span>WhatsApp (groupe ou contact)</span></label>
+      <label class="choice-item"><input type="radio" name="source"><span>Recherche Google</span></label>
+      <label class="choice-item"><input type="radio" name="source"><span>Studio Live Reco (YouTube)</span></label>
+      <label class="choice-item"><input type="radio" name="source"><span>Autre</span></label>
+    </div>
+  </div>
+
+  <!-- ════════════ ÉTAPE 3 ════════════ -->
+  <div class="section-banner">
+    <div class="section-num">3</div>
+    <div class="section-label">Choix de l'abonnement</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Sélectionnez votre formule <span class="req">*</span></div>
+    <div class="plan-cards">
+      <div class="plan-card" onclick="selectPlan(this, 'gratuit')">
+        <input type="radio" name="plan" value="gratuit" onchange="updateProgress()">
+        <div>
+          <div class="plan-title">🔓 GRATUIT</div>
+          <div class="plan-price">0 F</div>
+          <ul class="plan-desc">
+            <li>Accès à l'annuaire de base</li>
+            <li>Recherche de prestataires</li>
+            <li>Envoi de demandes de contact</li>
+          </ul>
+        </div>
+      </div>
+      <div class="plan-card" onclick="selectPlan(this, 'premium')">
+        <div class="plan-tag">RECOMMANDÉ</div>
+        <input type="radio" name="plan" value="premium" onchange="updateProgress()">
+        <div>
+          <div class="plan-title">⭐ VISITEUR PREMIUM</div>
+          <div class="plan-price">5 500 F <span style="font-size:14px;color:#999;font-weight:400">/ an</span></div>
+          <ul class="plan-desc">
+            <li>Devis express 48-72H garanti</li>
+            <li>Catalogue complet avec tarifs</li>
+            <li>1% remboursé sur vos commandes validées</li>
+            <li>Accès prioritaire aux nouveaux prestataires</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="qcard" id="paiement-block">
+    <div class="qlabel">Méthode de paiement <span style="color:#D4A827">(Visiteur Premium)</span></div>
+    <div class="choices">
+      <label class="choice-item"><input type="radio" name="paiement"><span>📱 MTN Mobile Money</span></label>
+      <label class="choice-item"><input type="radio" name="paiement"><span>📱 Orange Money</span></label>
+      <label class="choice-item"><input type="radio" name="paiement"><span>🏦 Virement bancaire</span></label>
+    </div>
+  </div>
+
+  <!-- ════════════ ÉTAPE 4 ════════════ -->
+  <div class="section-banner">
+    <div class="section-num">4</div>
+    <div class="section-label">Consentement</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="qcard">
+    <div class="qlabel">Conditions générales <span class="req">*</span></div>
+    <div class="choices">
+      <label class="choice-item" style="align-items:flex-start">
+        <input type="checkbox" id="cgu" onchange="updateProgress()" style="margin-top:2px">
+        <span>J'accepte les <strong>Conditions Générales d'Utilisation</strong> d'Event Reco Africa et je consens au traitement de mes données personnelles conformément à la politique de confidentialité.</span>
+      </label>
+      <label class="choice-item" style="align-items:flex-start">
+        <input type="checkbox" style="margin-top:2px">
+        <span>Je souhaite recevoir les actualités, offres et guides événementiels d'Event Reco Africa par WhatsApp / email. <em style="color:#999">(Optionnel)</em></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="submit-section">
+    <button class="submit-btn" onclick="submitForm()">✉️ Soumettre mon inscription</button>
+    <div class="submit-note">⚠️ Ne communiquez jamais vos mots de passe via ce formulaire</div>
+  </div>
+
+  <!-- SUCCESS SCREEN -->
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Inscription envoyée !</div>
+    <p class="success-text">Votre demande a bien été reçue. L'équipe <strong>Event Reco Africa</strong> vous contactera par <strong>WhatsApp</strong> dans les <strong>24 à 48 heures</strong> pour confirmer votre inscription.</p>
+    <div class="success-contact">
+      📱 <strong>WhatsApp :</strong> +225 07 00 00 00 00<br>
+      📧 <strong>Email :</strong> contact@eventreco.africa<br>
+      🌐 <strong>Site :</strong> www.eventreco.africa
+    </div>
+  </div>
+
+  <div class="form-footer">
+    Formulaire <strong>Event Reco Africa</strong> · Plateforme digitale événementielle CI<br>
+    📱 WhatsApp +225 07 00 00 00 00 · 📧 contact@eventreco.africa · 🌐 www.eventreco.africa
+  </div>
+
+</div>
+
+<script>
+  const REQUIRED_IDS = ['prenom','nom','email','whatsapp','ville'];
+  const REQUIRED_RADIOS = ['profil','freq','invites','plan'];
+
+  function updateProgress() {
+    let filled = 0;
+    let total = REQUIRED_IDS.length + REQUIRED_RADIOS.length + 1; // +1 for CGU
+
+    REQUIRED_IDS.forEach(id => {
+      if (document.getElementById(id)?.value?.trim()) filled++;
+    });
+    REQUIRED_RADIOS.forEach(name => {
+      if (document.querySelector(`input[name="${name}"]:checked`)) filled++;
+    });
+    if (document.getElementById('cgu')?.checked) filled++;
+
+    const pct = Math.round((filled / total) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = pct + '%';
+
+    const labels = ['Début du formulaire','Informations personnelles en cours...','Profil événementiel en cours...','Presque terminé !','Formulaire complet ✓'];
+    const idx = Math.min(Math.floor(pct / 25), 4);
+    document.getElementById('progress-label').textContent = labels[idx];
+
+    // Show/hide paiement block
+    const plan = document.querySelector('input[name="plan"]:checked');
+    document.getElementById('paiement-block').style.display = (plan?.value === 'premium') ? 'block' : 'none';
+  }
+
+  function selectPlan(card, value) {
+    document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    card.querySelector('input[type=radio]').checked = true;
+    updateProgress();
+  }
+
+  function submitForm() {
+    // Validation
+    const missing = [];
+    if (!document.getElementById('prenom')?.value?.trim()) missing.push('Prénom');
+    if (!document.getElementById('nom')?.value?.trim()) missing.push('Nom');
+    if (!document.getElementById('email')?.value?.trim()) missing.push('Email');
+    if (!document.getElementById('whatsapp')?.value?.trim()) missing.push('WhatsApp');
+    if (!document.getElementById('ville')?.value) missing.push('Ville');
+    if (!document.querySelector('input[name="profil"]:checked')) missing.push('Profil');
+    if (!document.querySelector('input[name="plan"]:checked')) missing.push('Formule d\'abonnement');
+    if (!document.getElementById('cgu')?.checked) missing.push('Acceptation des CGU');
+
+    if (missing.length > 0) {
+      alert('⚠️ Veuillez remplir les champs obligatoires :\n• ' + missing.join('\n• '));
+      return;
+    }
+
+    // Show success
+    document.getElementById('main-form').innerHTML = document.getElementById('success-screen').outerHTML;
+    document.getElementById('success-screen').style.display = 'block';
+    document.getElementById('progress-fill').style.width = '100%';
+    document.getElementById('progress-pct').textContent = '100%';
+    document.getElementById('progress-label').textContent = 'Formulaire envoyé ✓';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
