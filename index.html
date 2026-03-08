@@ -1,3 +1,8 @@
+bash
+
+cat /mnt/user-data/outputs/EventReco_Inscription_Organisateur.html
+Sortie
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -637,19 +642,19 @@
     <p class="success-text">Votre demande a bien été reçue. L'équipe <strong>Event Reco Africa</strong> vous contactera par <strong>WhatsApp</strong> dans les <strong>24 à 48 heures</strong> pour confirmer votre inscription.</p>
     <div class="success-contact">
       📱 <strong>WhatsApp :</strong> +225 07 00 00 00 00<br>
-      📧 <strong>Email :</strong> contact@eventreco.africa<br>
+      📧 <strong>Email :</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e0ecedf7e2e0f7c3e6f5e6edf7f1e6e0ecade2e5f1eae0e2">[email&#160;protected]</a><br>
       🌐 <strong>Site :</strong> www.eventreco.africa
     </div>
   </div>
 
   <div class="form-footer">
     Formulaire <strong>Event Reco Africa</strong> · Plateforme digitale événementielle CI<br>
-    📱 WhatsApp +225 07 00 00 00 00 · 📧 contact@eventreco.africa · 🌐 www.eventreco.africa
+    📱 WhatsApp +225 07 00 00 00 00 · 📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fd9e9293899c9e89bd988b9893898f989e92d39c9b8f949e9c">[email&#160;protected]</a> · 🌐 www.eventreco.africa
   </div>
 
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const REQUIRED_IDS = ['prenom','nom','email','whatsapp','ville'];
   const REQUIRED_RADIOS = ['profil','freq','invites','plan'];
 
@@ -685,7 +690,7 @@
     updateProgress();
   }
 
-  function submitForm() {
+  async function submitForm() {
     // Validation
     const missing = [];
     if (!document.getElementById('prenom')?.value?.trim()) missing.push('Prénom');
@@ -702,14 +707,41 @@
       return;
     }
 
+    // Collect all form data
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = '⏳ Envoi en cours...';
+    btn.disabled = true;
+
+    const typesEvenements = [...document.querySelectorAll('input[type=checkbox]:checked')]
+      .map(cb => cb.closest('.choice-item')?.querySelector('span')?.textContent).filter(Boolean).join(', ');
+    const services = [...document.querySelectorAll('input[type=checkbox]:checked')]
+      .map(cb => cb.closest('.choice-item')?.querySelector('span')?.textContent).filter(Boolean).join(', ');
+
+    const formData = new FormData();
+    formData.append('Prénom',               document.getElementById('prenom').value.trim());
+    formData.append('Nom',                  document.getElementById('nom').value.trim());
+    formData.append('Email',                document.getElementById('email').value.trim());
+    formData.append('WhatsApp',             document.getElementById('whatsapp').value.trim());
+    formData.append('Ville',                document.getElementById('ville').value);
+    formData.append('Profil',               document.querySelector('input[name="profil"]:checked')?.closest('.choice-item')?.querySelector('span')?.textContent || '');
+    formData.append('Entreprise',           document.querySelector('input[placeholder*="Raison"]')?.value || '');
+    formData.append('Types événements',     typesEvenements);
+    formData.append('Fréquence',            document.querySelector('input[name="freq"]:checked')?.closest('.choice-item')?.querySelector('span')?.textContent || '');
+    formData.append('Nb invités',           document.querySelector('input[name="invites"]:checked')?.closest('.choice-item')?.querySelector('span')?.textContent || '');
+    formData.append('Budget moyen',         document.querySelector('input[name="budget"]:checked')?.closest('.choice-item')?.querySelector('span')?.textContent || '');
+    formData.append('Formule',              document.querySelector('input[name="plan"]:checked')?.value || '');
+    formData.append('Paiement',             document.querySelector('input[name="paiement"]:checked')?.closest('.choice-item')?.querySelector('span')?.textContent || '');
+    formData.append('Source',              document.querySelector('input[name="source"]:checked')?.closest('.choice-item')?.querySelector('span')?.textContent || '');
+    formData.append('Newsletter',           document.querySelectorAll('input[type=checkbox]:checked').length > 1 ? 'Oui' : 'Non');
+
+    try {
+      await fetch('https://forminit.com/f/d6rfifev2st', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      });
+    } catch(e) { console.log('Envoi Forminit:', e); }
+
     // Show success
     document.getElementById('main-form').innerHTML = document.getElementById('success-screen').outerHTML;
-    document.getElementById('success-screen').style.display = 'block';
-    document.getElementById('progress-fill').style.width = '100%';
-    document.getElementById('progress-pct').textContent = '100%';
-    document.getElementById('progress-label').textContent = 'Formulaire envoyé ✓';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
-</body>
-</html>
+    documen
